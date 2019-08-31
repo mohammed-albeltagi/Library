@@ -1,0 +1,27 @@
+<nav class="navbar navbar-dark bg-dark">
+  <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+</nav>
+<form #form='ngForm' class="mb-4" autocomplete="off"  (submit)="onSubmit(form)">
+  <div class="form-group" style="width: 30%">
+    <label><strong>Category</strong></label>
+    <input class="form-control" style="background-color: gray" #Name="ngModel" name="Name" [(ngModel)]="formModel.name" required>
+  </div>
+  <div class="form-group">
+    <label for="ddlCategory"><strong>Category</strong></label>
+    <select class="form-control" style="width: 30%" id="ddlCategory" #ParentCategoryId="ngModel" name="ParentCategoryId" [(ngModel)]="formModel.parentCategoryId">
+      <option>Select parent category</option>
+      <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
+   </select>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-8 offset-md-2">
+      <button type="submit" class="btn btn-lg btn-block" style="width: 20%; color: #000;"  [disabled]="form.invalid">Add Category</button>
+    </div>
+  </div>
+</form>
+
+<div  style="width:18rem" *ngIf="categories">
+  <ul *ngFor="let category of categories">
+    <li><strong>{{category.name}}</strong></li>
+  </ul>
+</div>
